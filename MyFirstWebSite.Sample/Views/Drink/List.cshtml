@@ -1,0 +1,13 @@
+﻿
+@model DrinkListVM
+
+
+<h2>Drink Category</h2>
+
+<div class="row marginTop">
+    @foreach (var item in Model.Drinks)
+    {
+        @Html.Partial("DrinksSummary", item)
+    }
+</div>
+
