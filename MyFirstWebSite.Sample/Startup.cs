@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,8 +43,11 @@ namespace MyFirstWebSite.Sample
             services.AddSingleton<DbInitializer>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+
             services.AddTransient<ICategoryRepo, CategoryRepository>();
             services.AddTransient<IDrinkRepo, DrinkRepository>();
+            services.AddTransient<IOrderRepo, OrderRepository>();
 
             services.AddScoped(sp => ShoppingCart.GetCart(sp));
 
@@ -66,6 +70,7 @@ namespace MyFirstWebSite.Sample
             dbInitializer.Seed();
             app.UseAuthorization();
             app.UseSession();
+            app.UseAuthentication();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

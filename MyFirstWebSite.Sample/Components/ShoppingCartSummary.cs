@@ -18,7 +18,7 @@ namespace MyFirstWebSite.Sample.Components
 
         public IViewComponentResult Invoke()
         {
-            var items = new List<ShoppingCartItem>() { new ShoppingCartItem(), new ShoppingCartItem() };//_shoppingcart.GetShoppingCartItems();
+            var items = _shoppingcart.GetShoppingCartItems();
             _shoppingcart.ShoppingCartItems= items;
 
             var scVM=new ShoppingCartVM

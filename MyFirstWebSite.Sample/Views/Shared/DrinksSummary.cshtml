@@ -16,6 +16,16 @@
             </h3>
             <p>@Model.ShortDescription</p>
         </div>
+        <div class="addtoCart text-right">
+            <p class="button">
+                <a class="btn btn-success" id="cartButton"
+                    asp-controller="ShoppingCart"
+                   asp-action="AddToShoppingCart"
+                   asp-route-drinkId="@Model.DrinkID">
+                    Add To Cart
+                </a>
+            </p>
+        </div>
     </div>
 </div>
 

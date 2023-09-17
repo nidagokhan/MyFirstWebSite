@@ -19,18 +19,18 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">
-                                Home
-                                @await Component.InvokeAsync("CategoryMenu")
-                            </a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        @await Component.InvokeAsync("CategoryMenu")
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="Index">Contact Us</a>
                         </li>
                     </ul>
-
                     <ul class="nav navbar-nav">
                         @await Component.InvokeAsync("ShoppingCartSummary")
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        @await Html.PartialAsync("LoginPartial")
                     </ul>
                 </div>
             </div>

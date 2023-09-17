@@ -88,7 +88,9 @@ namespace MyFirstWebSite.Sample.Data.Models
         public List<ShoppingCartItem> GetShoppingCartItems()
         {
             return ShoppingCartItems ?? (ShoppingCartItems = _context.ShoppingCartItems.Where(a => a.ShoppingCartId == ShoppingCartId)
-                .Include(a => a.Drink).ToList()); //.Include(a => a.Drink): Bu, her alışveriş sepeti öğesinin bir içeceği (Drink) içermesini sağlar. Bu, ilişkili verileri çekmeyi ifade eder.
+                .Include(a => a.Drink).ToList()); 
+            
+            //.Include(a => a.Drink): Bu, her alışveriş sepeti öğesinin bir içeceği (Drink) içermesini sağlar. Bu, ilişkili verileri çekmeyi ifade eder.
            
             //Sonuç olarak, eğer ShoppingCartItems null ise veya daha önce çekilmemişse, bu kod, belirli bir alışveriş sepetinin tüm öğelerini veritabanından çeker ve ShoppingCartItems değişkenine atar. Eğer ShoppingCartItems daha önce çekilmişse, veritabanına tekrar sorgu atmayı önler ve mevcut öğeleri geri döndürür. Bu, veritabanı erişimi gerektiren işlemleri optimize etmek için kullanılır.
         }
@@ -102,8 +104,8 @@ namespace MyFirstWebSite.Sample.Data.Models
 
         public decimal GetShoppingCartTotal()
         {
-            var total = _context.ShoppingCartItems.Where(a => a.ShoppingCartId == ShoppingCartId).Select(c => c.Drink.Price * c.Amount).Sum();
-
+            var total = _context.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
+                  .Select(c => c.Drink.Price * c.Amount).Sum();
             return total;
         }
     }
